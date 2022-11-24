@@ -1,0 +1,33 @@
+resilience4j:
+  circuitbreaker:
+    instances:
+      product-service:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+  retry:
+    instances:
+      product-service:
+        waitDuration: 10s
+        maxAttempts: 5
+  ratelimiter:
+    instances:
+      product-service:
+        registerHealthIndicator: false
+        limitForPeriod: 10
+        limitRefreshPeriod: 10s
+        timeoutDuration: 3s
+spring:
+  application:
+    name: product-service
+  cache:
+    type: redis
+    redis:
+      time-to-live: 60000
+      cache-null-values: true
