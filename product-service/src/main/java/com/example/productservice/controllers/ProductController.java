@@ -58,9 +58,8 @@ public class ProductController {
         productService.createProduct(product);
     }
 
-    public Product addProductFallback(Exception e) {
+    public void addProductFallback(Exception e) {
         System.out.println("addProductFallback called");
-        return null;
     }
 
     public Product getProductFallback(Exception e) {
