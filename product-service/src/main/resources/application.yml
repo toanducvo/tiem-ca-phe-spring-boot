@@ -19,10 +19,28 @@ resilience4j:
   ratelimiter:
     instances:
       product-service:
-        registerHealthIndicator: false
+        registerHealthIndicator: true
         limitForPeriod: 10
         limitRefreshPeriod: 10s
         timeoutDuration: 3s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, circuitbreaker, retry, ratelimiter, metrics
+  endpoint:
+    health:
+      enabled: true
+    metrics:
+      enabled: true
+
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
+
 spring:
   application:
     name: product-service
